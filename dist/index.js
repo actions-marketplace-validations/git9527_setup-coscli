@@ -187,6 +187,7 @@ function run() {
             const region = core.getInput('region', inputOptions);
             const secretId = core.getInput('secret-id', inputOptions);
             const secretKey = core.getInput('secret-key', inputOptions);
+            const bucket = core.getInput('bucket', inputOptions);
             const sessionToken = core.getInput('session-token');
             const args = [
                 'config',
@@ -196,14 +197,18 @@ function run() {
                 '--secret-id',
                 secretId,
                 '--secret-key',
-                secretKey
+                secretKey,
+                '--bucket',
+                bucket
             ];
             if (sessionToken) {
                 args.push('--session-token', sessionToken);
             }
+            const emptyFile = yield exec.exec('echo "" > ~/.cos.yaml');
+            core.info(`create empty file with exit code ${emptyFile}`);
             const exitCode = yield exec.exec('coscli', args);
             if (exitCode === 0) {
-                core.info('coscli config is done');
+                core.info('coscli config is OK');
             }
             else {
                 core.warning('coscli config failed');
