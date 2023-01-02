@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - run: npm ci
-    - run: npm run all
       with:
         github-token: ${{ github.token }}
+    - run: npm ci
+    - run: npm run all
     - name: Compare the expected and actual dist
       run: |
         if [ "$(git diff --ignore-space-at-eol dist/ | wc -l)" -gt "0" ]; then
