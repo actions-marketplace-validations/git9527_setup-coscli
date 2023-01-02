@@ -40,13 +40,15 @@ async function downloadCosCli(version: string): Promise<string> {
     core.error('Failed to download coscli')
     throw error
   }
+
   core.debug(`coscli downloaded to: ${toolFile}`)
 
   // change permission
   fs.chmodSync(toolFile, 0o755)
 
   // cache
-  const toolPath = await tc.cacheFile(toolFile, ToolName, ToolName, version)
+  const fileName = process.platform === 'win32' ? `${ToolName}.exe` : ToolName
+  const toolPath = await tc.cacheFile(toolFile, fileName, ToolName, version)
   core.debug(`coscli cached to: ${toolPath}`)
   return toolPath
 }
