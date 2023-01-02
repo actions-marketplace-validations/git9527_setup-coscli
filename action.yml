@@ -11,6 +11,9 @@ inputs:
   secret-key:
     description: 'The Secret Key of the credentials'
     required: true
+  bucket:
+    description: 'The Bucket of target operation'
+    required: true
   session-token:
     description: 'The Session Token of the credentials, Optional'
     required: false
