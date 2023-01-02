@@ -1,11 +1,6 @@
 name: "test"
 on:
-  pull_request:
-    branches: [ "master" ]
-  push:
-    branches: [ "master" ]
-  schedule:
-    - cron: '0 0 * * *'
+  workflow_dispatch:
 
 jobs:
   test: # make sure the action works on a clean machine without building

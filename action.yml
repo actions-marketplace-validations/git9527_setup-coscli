@@ -2,17 +2,11 @@ name: 'Setup coscli environment'
 description: 'Download and config Tencent Cloud coscli'
 author: 'git9527'
 inputs:
-  region:
-    description: 'The region of your bucket'
-    required: true
   secret-id:
     description: 'The Secret ID of the credentials'
     required: true
   secret-key:
     description: 'The Secret Key of the credentials'
-    required: true
-  bucket:
-    description: 'The Bucket of target operation'
     required: true
   session-token:
     description: 'The Session Token of the credentials, Optional'

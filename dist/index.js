@@ -187,25 +187,19 @@ function run() {
             core.info('coscli is successfully installed');
             // config
             const inputOptions = { required: true };
-            const region = core.getInput('region', inputOptions);
             const secretId = core.getInput('secret-id', inputOptions);
             const secretKey = core.getInput('secret-key', inputOptions);
-            const bucket = core.getInput('bucket', inputOptions);
             const sessionToken = core.getInput('session-token');
             const args = [
                 'config',
-                'add',
-                '--region',
-                region,
-                '--secret-id',
+                'set',
+                '--secret_id',
                 secretId,
-                '--secret-key',
-                secretKey,
-                '--bucket',
-                bucket
+                '--secret_key',
+                secretKey
             ];
             if (sessionToken) {
-                args.push('--session-token', sessionToken);
+                args.push('--session_token', sessionToken);
             }
             fs.closeSync(fs.openSync(path.join(os.homedir(), '.cos.yaml'), 'w'));
             core.info('create empty file .cos.yaml file');

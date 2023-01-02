@@ -17,11 +17,9 @@ steps:
 - uses: actions/checkout@v1
 - uses: git9527/setup-coscli@v1
   with:
-    region: ${{ secrets.COS_REGION }}
     secret-id: ${{ secrets.COS_SECRET_ID }}
     secret-key: ${{ secrets.COS_SECRET_KEY }}
     session-token: ${{ secrets.COS_TOKEN }} # Optional
-    bucket: ${{ secrets.COS_BUCKET }}
     coscli-version: 'v0.12.0-beta' # Optional, default to 'v0.12.0-beta'.  Use 'latest' to get the latest version.
 - run: coscli sync ~/example.txt cos://bucket1/example.txt
 ```
