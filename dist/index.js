@@ -45,7 +45,7 @@ const github = __importStar(__nccwpck_require__(5438));
 const tc = __importStar(__nccwpck_require__(7784));
 const fs = __importStar(__nccwpck_require__(5747));
 const ToolName = 'coscli';
-const DownloadEndpoint = 'https://github.com/tencentyun/coscli/releases/download/';
+const DownloadEndpoint = 'https://github.com/tencentyun/coscli/releases/download';
 /**
  * Install coscli to PATH
  * @param version the version of coscli

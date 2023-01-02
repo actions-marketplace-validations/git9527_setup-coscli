@@ -4,7 +4,7 @@ import * as tc from '@actions/tool-cache'
 import * as fs from 'fs'
 
 const ToolName = 'coscli'
-const DownloadEndpoint = 'https://github.com/tencentyun/coscli/releases/download/'
+const DownloadEndpoint = 'https://github.com/tencentyun/coscli/releases/download'
 
 /**
  * Install coscli to PATH
