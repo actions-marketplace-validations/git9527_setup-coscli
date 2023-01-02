@@ -24,6 +24,7 @@ jobs:
         secret-key: ${{ secrets.COS_SECRET_KEY }}
         bucket: ${{ secrets.COS_BUCKET }}
         coscli-version: ${{ matrix.version }}
+        github-token: ${{ github.token }}
     - run: coscli -v
     - run: coscli ls > /dev/null
       shell: bash

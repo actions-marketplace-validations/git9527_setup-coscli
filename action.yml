@@ -24,7 +24,7 @@ inputs:
   github-token:
     description: 'The GitHub token used to call API to fetch the latest version info'
     required: false
-    default: ${{ secrets.GITHUB_TOKEN }}
+    default: ${{ github.token }}
 runs:
   using: 'node16'
   main: 'dist/index.js'
