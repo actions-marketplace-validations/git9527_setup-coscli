@@ -176,6 +176,8 @@ const core = __importStar(__nccwpck_require__(2186));
 const exec = __importStar(__nccwpck_require__(1514));
 const installer = __importStar(__nccwpck_require__(1480));
 const os = __importStar(__nccwpck_require__(2087));
+const fs = __importStar(__nccwpck_require__(5747));
+const path = __importStar(__nccwpck_require__(5622));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -205,8 +207,8 @@ function run() {
             if (sessionToken) {
                 args.push('--session-token', sessionToken);
             }
-            const emptyFile = yield exec.exec(`echo "" > ${os.homedir()}/.cos.yaml`);
-            core.info(`create empty file with exit code ${emptyFile}`);
+            fs.closeSync(fs.openSync(path.join(os.homedir(), '.cos.yaml'), 'w'));
+            core.info('create empty file .cos.yaml file');
             const exitCode = yield exec.exec('coscli', args);
             if (exitCode === 0) {
                 core.info('coscli config is OK');

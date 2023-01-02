@@ -2,6 +2,8 @@ import * as core from '@actions/core'
 import * as exec from '@actions/exec'
 import * as installer from './installer'
 import * as os from 'os'
+import * as fs from 'fs'
+import * as path from 'path'
 
 async function run(): Promise<void> {
   try {
@@ -32,8 +34,8 @@ async function run(): Promise<void> {
     if (sessionToken) {
       args.push('--session-token', sessionToken)
     }
-    const emptyFile = await exec.exec(`echo "" > ${os.homedir()}/.cos.yaml`)
-    core.info(`create empty file with exit code ${emptyFile}`)
+    fs.closeSync(fs.openSync(path.join(os.homedir(), '.cos.yaml'), 'w'))
+    core.info('create empty file .cos.yaml file')
     const exitCode = await exec.exec('coscli', args)
     if (exitCode === 0) {
       core.info('coscli config is OK')
