@@ -86,7 +86,8 @@ function downloadCosCli(version) {
         // change permission
         fs.chmodSync(toolFile, 0o755);
         // cache
-        const toolPath = yield tc.cacheFile(toolFile, ToolName, ToolName, version);
+        const fileName = process.platform === 'win32' ? `${ToolName}.exe` : ToolName;
+        const toolPath = yield tc.cacheFile(toolFile, fileName, ToolName, version);
         core.debug(`coscli cached to: ${toolPath}`);
         return toolPath;
     });
@@ -183,25 +184,29 @@ function run() {
             core.info('coscli is successfully installed');
             // config
             const inputOptions = { required: true };
-            const endpoint = core.getInput('endpoint', inputOptions);
-            const accessKeyId = core.getInput('access-key-id', inputOptions);
-            const accessKeySecret = core.getInput('access-key-secret', inputOptions);
-            const stsToken = core.getInput('sts-token');
+            const region = core.getInput('region', inputOptions);
+            const secretId = core.getInput('secret-id', inputOptions);
+            const secretKey = core.getInput('secret-key', inputOptions);
+            const sessionToken = core.getInput('session-token');
             const args = [
                 'config',
-                '--endpoint',
-                endpoint,
-                '--access-key-id',
-                accessKeyId,
-                '--access-key-secret',
-                accessKeySecret
+                'add',
+                '--region',
+                region,
+                '--secret_id',
+                secretId,
+                '--secret_key',
+                secretKey
             ];
-            if (stsToken) {
-                args.push('--sts-token', stsToken);
+            if (sessionToken) {
+                args.push('--token', sessionToken);
             }
             const exitCode = yield exec.exec('coscli', args);
             if (exitCode === 0) {
                 core.info('coscli config is done');
+            }
+            else {
+                core.warning('coscli config failed');
             }
         }
         catch (error) {
