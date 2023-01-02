@@ -2,9 +2,6 @@ name: 'Setup coscli environment'
 description: 'Download and config Tencent Cloud coscli'
 author: 'git9527'
 inputs:
-  region:
-    description: 'The region of your bucket'
-    required: true
   secret-id:
     description: 'The Secret ID of the credentials'
     required: true
@@ -23,7 +20,7 @@ inputs:
     required: false
     default: ${{ github.token }}
 runs:
-  using: 'node16'
+  using: 'node12'
   main: 'dist/index.js'
 branding:
   icon: 'download-cloud'
