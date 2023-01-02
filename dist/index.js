@@ -189,8 +189,10 @@ function run() {
             const inputOptions = { required: true };
             const secretId = core.getInput('secret-id', inputOptions);
             const secretKey = core.getInput('secret-key', inputOptions);
+            const bucket = core.getInput('bucket', inputOptions);
+            const region = core.getInput('region', inputOptions);
             const sessionToken = core.getInput('session-token');
-            const args = [
+            const args1 = [
                 'config',
                 'set',
                 '--secret_id',
@@ -199,16 +201,24 @@ function run() {
                 secretKey
             ];
             if (sessionToken) {
-                args.push('--session_token', sessionToken);
+                args1.push('--session_token', sessionToken);
             }
             fs.closeSync(fs.openSync(path.join(os.homedir(), '.cos.yaml'), 'w'));
             core.info('create empty file .cos.yaml file');
-            const exitCode = yield exec.exec('coscli', args);
+            let exitCode = yield exec.exec('coscli', args1);
             if (exitCode === 0) {
-                core.info('coscli config is OK');
+                core.info('coscli config set is OK');
             }
             else {
-                core.warning('coscli config failed');
+                core.warning('coscli config set failed');
+            }
+            const args2 = ['config', 'add', '-b', bucket, '-r', region];
+            exitCode = yield exec.exec('coscli', args2);
+            if (exitCode === 0) {
+                core.info('coscli config add is OK');
+            }
+            else {
+                core.warning('coscli config add failed');
             }
         }
         catch (error) {
