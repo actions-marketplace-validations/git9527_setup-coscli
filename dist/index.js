@@ -193,13 +193,13 @@ function run() {
                 'add',
                 '--region',
                 region,
-                '--secret_id',
+                '--secret-id',
                 secretId,
-                '--secret_key',
+                '--secret-key',
                 secretKey
             ];
             if (sessionToken) {
-                args.push('--token', sessionToken);
+                args.push('--session-token', sessionToken);
             }
             const exitCode = yield exec.exec('coscli', args);
             if (exitCode === 0) {
