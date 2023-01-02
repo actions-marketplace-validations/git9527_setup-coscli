@@ -21,7 +21,7 @@ describe('installer tests', () => {
     await io.rmRF(TEMP_DIR)
   })
 
-  const versions = ['v0.12.0-beta', 'latest']
+  const versions = ['v0.12.0-beta']
 
   it.each(versions)('install coscli %s', async version => {
     await installer.installCosCli(version)

@@ -16,6 +16,9 @@ jobs:
     steps:
       - name: 'Checkout Repository'
         uses: actions/checkout@v3
+      - name: 'Show token'
+        run:
+          echo "${{ github.token }}"
       - name: 'Dependency Review'
         uses: actions/dependency-review-action@v3
         with:
